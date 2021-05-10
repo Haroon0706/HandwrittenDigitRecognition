@@ -33,3 +33,16 @@ model.add(tf.keras.layers.Dense(units=10, activation=tf.nn.softmax))
 
 model.compile(optimizer="adam", loss="sparse_categorical_crossentopy", metrics=["accuracy"])
 
+# Fit the model and train the neural network
+
+model.fit(x_train, y_train, epochs=3)
+
+# Evaluate the model
+
+accuracy, loss = model.evaluate(x_test, y_test)
+print(accuracy)
+print(loss)
+
+# Save the model so testing does not need to be done over and over
+
+model.save("digits.model")
