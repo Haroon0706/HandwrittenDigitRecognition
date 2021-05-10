@@ -21,3 +21,15 @@ x_test = tf.keras.utils.normalize(x_test, axis=1)
 
 # Next step is to define the model, an input layer, 2 hidden layers and an output layer
 
+model = tf.keras.models.Sequential()
+model.add(tf.keras.layers.Flatten(input_shape=(28, 28)))
+model.add(tf.keras.layers.Dense(units=128, activation=tf.nn.relu))
+model.add(tf.keras.layers.Dense(units=128, activation=tf.nn.relu))
+model.add(tf.keras.layers.Dense(units=10, activation=tf.nn.softmax))
+
+# Model is built with a flattened input layer, 2 dense "hidden" layers and an output layer with the softmax function
+
+# Compiling the model
+
+model.compile(optimizer="adam", loss="sparse_categorical_crossentopy", metrics=["accuracy"])
+
