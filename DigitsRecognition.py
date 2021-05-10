@@ -31,7 +31,7 @@ model.add(tf.keras.layers.Dense(units=10, activation=tf.nn.softmax))
 
 # Compiling the model
 
-model.compile(optimizer="adam", loss="sparse_categorical_crossentopy", metrics=["accuracy"])
+model.compile(optimizer="adam", loss="sparse_categorical_crossentropy", metrics=["accuracy"])
 
 # Fit the model and train the neural network
 
