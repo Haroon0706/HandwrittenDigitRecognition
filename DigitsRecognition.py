@@ -3,6 +3,7 @@
 import cv2 as cv
 import numpy as np
 import matplotlib.pyplot as plt
+from numpy.core.defchararray import array
 import tensorflow as tf
 
 # HYPERPARAMS
@@ -13,6 +14,7 @@ LOSS ="sparse_categorical_crossentropy"
 """ First step is to load the dataset of the handwritten digits 
 Using the MNIST dataset wohich consists of around 60,000 images of handwritten digits
 """
+
 mnist = tf.keras.datasets.mnist
 
 # Split into training and testing data
@@ -51,3 +53,16 @@ print(loss)
 # Save the model so testing does not need to be done over and over
 
 model.save(f"optimizer_{OPTIMIZER}_epochs_{EPOCHS}_loss_{LOSS}.model")
+
+# Next step is to read in test data created in Microsoft paint using OpenCV
+# Model prediction of imported hand written paint digits
+
+for x in range(1,6):
+    img = cv.imread(f"{x}.png")[:,:,0]
+    img = np.invert(np.array([img]))
+    prediction = model.predict(img)
+    print(f"The result is probably: {np.argmax(prediction)}")
+    plt.imshow(img[0], cmap=plt.cm.binary)
+    plt.show()
+
+# Next step is to create a GUI where digits can be drawn as paint png files are of poor quality giving less than desired results
