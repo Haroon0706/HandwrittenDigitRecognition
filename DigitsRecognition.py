@@ -5,6 +5,11 @@ import numpy as np
 import matplotlib.pyplot as plt
 import tensorflow as tf
 
+# HYPERPARAMS
+OPTIMIZER = "adam"
+EPOCHS = 3
+LOSS ="sparse_categorical_crossentropy"
+
 """ First step is to load the dataset of the handwritten digits 
 Using the MNIST dataset wohich consists of around 60,000 images of handwritten digits
 """
@@ -31,11 +36,11 @@ model.add(tf.keras.layers.Dense(units=10, activation=tf.nn.softmax))
 
 # Compiling the model
 
-model.compile(optimizer="adam", loss="sparse_categorical_crossentropy", metrics=["accuracy"])
+model.compile(optimizer=OPTIMIZER, loss= LOSS, metrics=["accuracy"])
 
 # Fit the model and train the neural network
 
-model.fit(x_train, y_train, epochs=3)
+model.fit(x_train, y_train, epochs=EPOCHS)
 
 # Evaluate the model
 
@@ -45,4 +50,4 @@ print(loss)
 
 # Save the model so testing does not need to be done over and over
 
-model.save("digits.model")
+model.save(f"optimizer_{OPTIMIZER}_epochs_{EPOCHS}_loss_{LOSS}.model")
